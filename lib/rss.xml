@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[obsidian-lean]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://127.0.0.1/</link><image><url>http://127.0.0.1/lib/media/favicon.png</url><title>obsidian-lean</title><link>http://127.0.0.1/</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 30 Apr 2024 17:24:29 GMT</lastBuildDate><atom:link href="http://127.0.0.1/lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 30 Apr 2024 17:24:27 GMT</pubDate><copyright><![CDATA[liruohrh]]></copyright><ttl>60</ttl><dc:creator>liruohrh</dc:creator><item><title><![CDATA[Demo白板]]></title><description><![CDATA[ 
+ <img src="http://127.0.0.1/lib/media/神里绫华.jpg" draggable="false">神里绫华.jpg<br>
+<br>几乎全平台支持
+<br>本地编辑，但提供远程存储服务：<a data-tooltip-position="top" aria-label="https://obsidian.md/publish" rel="noopener" class="external-link" href="https://obsidian.md/publish" target="_blank">Obsidian Publish</a>
+
+<br>但是可以用插件代替
+
+
+<br>插件功能丰富
+index<br>白板测试]]></description><link>http://127.0.0.1/白板测试/demo白板.html</link><guid isPermaLink="false">白板测试/Demo白板.canvas</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 17:10:02 GMT</pubDate><enclosure url="http://127.0.0.1/lib/media/神里绫华.jpg" length="0" type="image/jpeg"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;http://127.0.0.1/lib/media/神里绫华.jpg&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[调用]]></title><description><![CDATA[ 
+ <br><br>
+val webView = createWebView()
+call(webView)
+
+
+
+func createWebView(): WebView{
+    val webView = WebView(splitties.init.appCtx)
+    webView.settings.run{
+	    javaScriptEnabled=true
+	    domStorageEnabled=true
+	    blockNetworkImage=true
+	    userAgentString=xxx
+	    mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+    }
+    webView.webViewClient = xxx
+}
+
+func call(webView: WebView){
+	if(isLoadHtml){
+		if(hasHistoryURL){
+		    webView.loadDataWithBaseURL(url, html, "text/html", getEncoding(), url)
+		}else{
+			webView.loadData(html, "text/html", getEncoding())
+		} 
+	}else{
+		if(hasAdditionalHttpHeaders){
+			webView.loadUrl(url!!, additionalHttpHeaders)
+		}else{
+			webView.loadUrl(url!!)  
+		}
+	}
+}
+复制<br><br>
+<br>LoadsImagesAutomatically（true）：自动加载data/network url schema的image（即img标签）
+<br>BlockNetworkImage（false）：阻断加载network url schema的image
+<br>BlockNetworkLoads：阻断加载所有网络资源
+
+<br>有android.Manifest.permission.INTERNET时默认false
+<br>没有网络权限时设置为false，会抛出 SecurityException 
+
+
+<br>JavaScriptEnabled（false）：可执行JS
+<br>DomStorageEnabled（false）：DOM Storage API
+<br>UserAgentString：设置后，忽视User-Agent Client Hints headers 和 navigator.userAgentData
+<br>CacheMode：
+<br>MixedContentMode：http/https
+<br><br>
+<br>evaluateJavascript：执行JS，返回值回调
+<br><br>
+<br>接收notifications 和 requests
+
+<br>比如拦截网络请求，执行page加载完成回调
+
+
+<br>主要方法
+
+<br>onPageFinished：page加载完成
+
+<br>因为页面是异步绘制的，页面的JS可能会修改DOM，page就不算加载完
+
+<br>webView.postVisualStateCallback：在WebView#onDraw前执行
+
+
+
+
+<br>onReceivedSslError：资源请求发生SSL错误
+
+
+<br>shouldInterceptRequest：拦截请求，返回响应
+
+<br>响应为null则继续执行这个请求
+
+
+<br>shouldOverrideUrlLoading：撤销URL的加载，即取消请求
+<br>onLoadResource：将要加载的资源
+]]></description><link>http://127.0.0.1/笔记测试/android/webview.html</link><guid isPermaLink="false">笔记测试/android/WebView.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Wed, 13 Mar 2024 09:57:54 GMT</pubDate></item><item><title><![CDATA[Export]]></title><description><![CDATA[ 
+ <br><br>
+<br>
+导出目录需要自己创建
+
+<br>
+目录结构：照搬目录
+
+<br>
+Online Web Server：图片资源是相对URL
+
+<br>
+Html Documents：图片资源是data编码（但是图片依然存在）
+
+<br>
+Raw Html Documents：
+
+<br>图片和Html Documents一样
+<br>无File nav tree，Search bar，Document outline/table of content
+
+
+<br>
+必须手动一个index文章
+
+<br>
+不能增量导出，每次都得导出所有需要的
+
+<br><br><br>
+<br>Theme Toogle：切换主题（Dart、Light）
+
+<br>默认当前主题，但可能不完全，但是基本都有
+
+
+<br>Document outline/table of contents（RightSideNav，Markdown标题目录）
+<br>File nav tree（LeftSideNav）
+<br>File &amp; Folder Icons
+<br>Search bar：可以用obsidian语法，但是有可能出现搜索不到的结果在搜索结果中
+<br>Graph view：关系图谱
+<br><br>
+<br>Only export modifies files：仅导出，从最新导出开始，被修改了的文件
+<br>Delete old files：删除，从最新导出开始，已导出但本次导出为选中的文件
+
+<br>增量导出？？，但是会导致File nav tree只有本次导出为选中的文件
+
+<br>因此推荐开启
+
+
+
+
+<br><br>
+<br>Public site URL
+
+<br>什么需要？RSS，head中一些SSO信息
+
+
+<br>Author Name：
+<br>Vault Title
+<br>Create RSS feed
+
+<br>或许是RSS订阅。。。
+
+
+<br><br>Log:
+[WARNING] 	Creating an RSS feed requires a site url to be set in the export settings.
+[INFO] 	Using "调用" header as title because it was H1 at the top of the page
+[INFO] 	Using "export" header as title because it was H1 at the top of the page
+[INFO] 	Using "文章" header as title because it was H1 at the top of the page
+[INFO] 	Using "一个白板" header as title because it was H1 at the top of the page
+[INFO] 	Closing render window
+
+
+Settings:
+	settingsVersion --------- 1.8.01
+	makeOfflineCompatible     false
+	inlineAssets ------------ false
+	includePluginCSS          1 plugins included
+	includeSvelteCSS -------- true
+	titleProperty             title
+	customHeadContentPath ---
+	faviconPath              
+	documentWidth ----------- 40em
+	sidebarWidth              20em
+	minOutlineCollapse ------ 2
+	startOutlineCollapsed     false
+	allowFoldingHeadings ---- true
+	allowFoldingLists         true
+	allowResizingSidebars --- true
+	logLevel                  warning
+	minifyHTML -------------- true
+	makeNamesWebStyle         true
+	onlyExportModified ------ true
+	deleteOldFiles            true
+	addThemeToggle ---------- true
+	addOutline                true
+	addFileNav -------------- true
+	addSearchBar              true
+	addGraphView ------------ true
+	addTitle                  true
+	addRSSFeed -------------- true
+	siteURL                  
+	authorName -------------- liruohrh
+	vaultTitle                obsidian-lean
+	exportPreset ------------ website
+	openAfterExport           false
+	graphAttractionForce ---- 1
+	graphLinkLength           10
+	graphRepulsionForce ----- 150
+	graphCentralForce         3
+	graphEdgePruning -------- 100
+	graphMinNodeSize          3
+	graphMaxNodeSize -------- 7
+	showDefaultTreeIcons      true
+	emojiStyle -------------- Native
+	defaultFileIcon           lucide//file
+	defaultFolderIcon ------- lucide//folder
+	defaultMediaIcon          lucide//file-image
+	exportPath -------------- C:\\\\Users\\LYM\\Documents\\obsidian\\note-dist
+	filesToExport             0
+
+
+Enabled Plugins:
+	Git File Explorer
+	Webpage HTML Export
+
+
+复制]]></description><link>http://127.0.0.1/插件笔记/webpage-html-export.html</link><guid isPermaLink="false">插件笔记/Webpage Html Export.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 17:21:30 GMT</pubDate></item><item><title><![CDATA[文章]]></title><description><![CDATA[ 
+ <br><br>
+<br><a data-href="index" href="http://127.0.0.1/index.html" class="internal-link" target="_self" rel="noopener">index</a>
+<br><br>
+<br><a data-href="神里绫华.jpg" href="http://127.0.0.1/imgs/神里绫华.jpg" class="internal-link" target="_self" rel="noopener">神里绫华.jpg</a>
+<br><br><img alt="神里绫华.jpg" src="http://127.0.0.1/lib/media/神里绫华.jpg">]]></description><link>http://127.0.0.1/资源引测试/图片+文章.html</link><guid isPermaLink="false">资源引测试/图片+文章.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 16:45:36 GMT</pubDate><enclosure url="http://127.0.0.1/lib/media/神里绫华.jpg" length="0" type="image/jpeg"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;http://127.0.0.1/lib/media/神里绫华.jpg&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[一个白板]]></title><description><![CDATA[ 
+ <br><br>
+<br><a data-tooltip-position="top" aria-label="Demo白板.canvas" data-href="Demo白板.canvas" href="http://127.0.0.1/白板测试/demo白板.html" class="internal-link" target="_self" rel="noopener">Demo白板</a>
+]]></description><link>http://127.0.0.1/资源引测试/引用白板的文章.html</link><guid isPermaLink="false">资源引测试/引用白板的文章.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 16:43:08 GMT</pubDate></item><item><title><![CDATA[index]]></title><description><![CDATA[ 
+ <br>
+<br>几乎全平台支持
+<br>本地编辑，但提供远程存储服务：<a data-tooltip-position="top" aria-label="https://obsidian.md/publish" rel="noopener" class="external-link" href="https://obsidian.md/publish" target="_blank">Obsidian Publish</a>
+
+<br>但是可以用插件代替
+
+
+<br>插件功能丰富
+]]></description><link>http://127.0.0.1/index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 16:32:34 GMT</pubDate></item><item><title><![CDATA[obsidian配置]]></title><description><![CDATA[ 
+ <br>
+<br>每个obsidian仓库（Vault）都有自己的配置和插件.obsidian/，不会共享
+]]></description><link>http://127.0.0.1/obsidian配置.html</link><guid isPermaLink="false">obsidian配置.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 17:06:13 GMT</pubDate></item></channel></rss>
