@@ -1,5 +1,312 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[obsidian-lean]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://127.0.0.1/</link><image><url>http://127.0.0.1/lib/media/favicon.png</url><title>obsidian-lean</title><link>http://127.0.0.1/</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 30 Apr 2024 17:24:29 GMT</lastBuildDate><atom:link href="http://127.0.0.1/lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 30 Apr 2024 17:24:27 GMT</pubDate><copyright><![CDATA[liruohrh]]></copyright><ttl>60</ttl><dc:creator>liruohrh</dc:creator><item><title><![CDATA[Demo白板]]></title><description><![CDATA[ 
- <img src="http://127.0.0.1/lib/media/神里绫华.jpg" draggable="false">神里绫华.jpg<br>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[obsidian-lean]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib\media\favicon.png</url><title>obsidian-lean</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Wed, 01 May 2024 09:59:57 GMT</lastBuildDate><atom:link href="lib\rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 01 May 2024 09:59:56 GMT</pubDate><copyright><![CDATA[liruohrh]]></copyright><ttl>60</ttl><dc:creator>liruohrh</dc:creator><item><title><![CDATA[推荐]]></title><description><![CDATA[ 
+ <br>
+<br>
+部署
+
+<br>Webpage Html Export导出HTML
+
+<br>但是多了复制资源的操作，也不支持增量更新
+
+<br>笔记太大时就有很大问题了
+
+
+
+
+<br><a data-tooltip-position="top" aria-label="http://draw.io" rel="noopener" class="external-link" href="http://draw.io" target="_blank">draw.io</a>画图导出PNG、SVG
+
+
+<br>
+还是自己基于Webpage Html Export来修改吧，再加上Github Publisher
+
+<br>
+需求分析
+
+<br>部署git pages
+
+
+]]></description><link>插件笔记\推荐.html</link><guid isPermaLink="false">插件笔记/推荐.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Wed, 01 May 2024 09:50:48 GMT</pubDate></item><item><title><![CDATA[Enhancing Export]]></title><description><![CDATA[ 
+ <br>
+<br>使用pandoc导出（需要自己安装，配置路径或者在PATH中）
+<br>不过有大BUG，用不了
+]]></description><link>插件笔记\enhancing-export.html</link><guid isPermaLink="false">插件笔记/Enhancing Export.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Wed, 01 May 2024 08:24:50 GMT</pubDate></item><item><title><![CDATA[配置]]></title><description><![CDATA[ 
+ <br>
+<br>仅限于存储到Github而已
+<br>其中，会对图片链接（仅![]()）修改为{repo}/raw/{branch}/{path}
+<br><br><br>
+<br>配置仓库名，用户名，分支名，token（在其here点击，自动跳到配置好的token，然后创建）
+<br><br>
+<br>Root folder：
+
+<br>达能File tree in repository是Obsidian Path时
+
+<br>必须手动写，尽管看起来好像有默认值docs
+<br>这是上传Vault到仓库的目录，默认仓库根目录
+
+
+
+
+<br><br>
+<br>对note内容进行修改
+<br><br>
+<br>Structure：关闭，且Default attachment folder有值时把资源复制到该目录（必须手动写，尽管看起来好像有默认值）
+<br><br>
+<br>Share all files：开启则不需要文档属性确认，否则需要文档属性是Share key才会推送
+<br>Excluded folders：排除目录
+]]></description><link>插件笔记\github-publisher.html</link><guid isPermaLink="false">插件笔记/Github Publisher.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Wed, 01 May 2024 09:47:05 GMT</pubDate></item><item><title><![CDATA[Export]]></title><description><![CDATA[ 
+ <br><br>
+<br>
+导出目录需要自己创建
+
+<br>
+目录结构：照搬目录
+
+<br>
+Online Web Server：图片资源是相对URL
+
+<br>
+Html Documents：图片资源是data编码（但是图片依然存在）
+
+<br>
+Raw Html Documents：
+
+<br>图片和Html Documents一样
+<br>无File nav tree，Search bar，Document outline/table of content
+
+
+<br>
+必须手动一个index文章
+
+<br>
+不能增量导出，每次都得导出所有需要的
+
+<br>
+图片：第一次会复制资源到lib\media
+
+<br>每次都会自动替换![[path]]的链接为lib\media中的
+<br>复制资源作用：对markdown语法的图片才有效![]() ![][]，对obsidian的无效![[]]
+
+<br>因为markdown语法可能引用Vault外的资源，obsidian语法只能引用本Vault内的资源
+
+
+<br>BUG：只有第一次时才复制资源，否则除非lib\media\metadata.json，但删除了这个可能等同于全删了
+<br>手动优化：资源都放在仓库里，用VSCode或者其他工具全局替换回自己的资源目录即可
+
+<br>而且使用外部资源，导致Vault中没有该资源，就生成不了资源的File nav tree
+
+
+
+
+<br><br><br>
+<br>Theme Toogle：切换主题（Dart、Light）
+
+<br>默认当前主题，但可能不完全，但是基本都有
+
+
+<br>Document outline/table of contents（RightSideNav，Markdown标题目录）
+<br>File nav tree（LeftSideNav）
+<br>File &amp; Folder Icons
+<br>Search bar：可以用obsidian语法，但是有可能出现搜索不到的结果在搜索结果中
+<br>Graph view：关系图谱
+<br><br>
+<br>Only export modifies files：仅导出，从最新导出开始，被修改了的文件
+<br>Delete old files：删除，从最新导出开始，已导出但本次导出为选中的文件
+
+<br>增量导出？？，但是会导致File nav tree只有本次导出为选中的文件
+
+<br>因此推荐开启
+
+
+
+
+<br><br>
+<br>Public site URL
+
+<br>什么需要？RSS，head中一些SSO信息
+
+
+<br>Author Name：
+<br>Vault Title
+<br>Create RSS feed
+
+<br>或许是RSS订阅。。。
+
+
+]]></description><link>插件笔记\webpage-html-export.html</link><guid isPermaLink="false">插件笔记/Webpage Html Export.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Wed, 01 May 2024 08:26:10 GMT</pubDate></item><item><title><![CDATA[文章]]></title><description><![CDATA[ 
+ <br><br>
+<br>index<br><br><br>
+<br>几乎全平台支持
+<br>本地编辑，但提供远程存储服务：<a data-tooltip-position="top" aria-label="https://obsidian.md/publish" rel="noopener" class="external-link" href="https://obsidian.md/publish" target="_blank">Obsidian Publish</a>
+
+<br>但是可以用插件代替
+
+
+<br>概念
+
+<br>Vault：笔记仓库，配置目录.obsidian/
+
+<br>选择性复制（即以防重新下载插件、主题）
+
+<br>workspace.json：不必，当前工作状态
+<br>appearance.json：可选，主题配置
+<br>community-plugins.json：激活的社区插件
+<br>plugins\，下载的插件
+
+<br>插件配置保存在{plugin}/data.json
+
+
+<br>themes\，下载的主题
+<br>除此之外都可以不要，除非要一样的配置
+
+
+
+
+
+
+<br><br>
+<br>注意：
+
+<br>有些插件可能是冲突的，不能同时使用
+
+
+
+<br><br>
+<br><a data-href="../神里绫华.jpg" href="imgs\神里绫华.jpg" class="internal-link" target="_self" rel="noopener">../神里绫华.jpg</a>
+<br><br><img src="lib\media\神里绫华.jpg"><br><img alt="../imgs/2.png" src="lib\media\2.png"><br>“C:\Users\LYM\Pictures\wallpaper\mmexport1634286771396.jpg” could not be found.<br><img src="lib\media\mmexport1634286771396.jpg" referrerpolicy="no-referrer"><br><img src="lib\media\奇蛋物语.webp" referrerpolicy="no-referrer"><br><br><img alt="drawio" src="lib\media\drawio.png">]]></description><link>资源引测试\图片+文章.html</link><guid isPermaLink="false">资源引测试/图片+文章.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Wed, 01 May 2024 09:20:41 GMT</pubDate><enclosure url="lib\media\神里绫华.jpg" length="0" type="image/jpeg"/><content:encoded>&lt;figure&gt;&lt;img src="lib\media\神里绫华.jpg"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[介绍]]></title><description><![CDATA[ 
+ <br><br>
+<br>几乎全平台支持
+<br>本地编辑，但提供远程存储服务：<a data-tooltip-position="top" aria-label="https://obsidian.md/publish" rel="noopener" class="external-link" href="https://obsidian.md/publish" target="_blank">Obsidian Publish</a>
+
+<br>但是可以用插件代替
+
+
+<br>概念
+
+<br>Vault：笔记仓库，配置目录.obsidian/
+
+<br>选择性复制（即以防重新下载插件、主题）
+
+<br>workspace.json：不必，当前工作状态
+<br>appearance.json：可选，主题配置
+<br>community-plugins.json：激活的社区插件
+<br>plugins\，下载的插件
+
+<br>插件配置保存在{plugin}/data.json
+
+
+<br>themes\，下载的主题
+<br>除此之外都可以不要，除非要一样的配置
+
+
+
+
+
+
+<br><br>
+<br>注意：
+
+<br>有些插件可能是冲突的，不能同时使用
+
+
+]]></description><link>index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Wed, 01 May 2024 09:13:13 GMT</pubDate></item><item><title><![CDATA[链接]]></title><description><![CDATA[ 
+ <br>
+<br><a data-tooltip-position="top" aria-label="https://forum-zh.obsidian.md/t/topic/435" rel="noopener" class="external-link" href="https://forum-zh.obsidian.md/t/topic/435" target="_blank">MarkDown语法 超详细教程 - 经验分享 - Obsidian 中文论坛</a>
+<br><br>
+<br>语法：
+
+<br>内部资源：引用链接[](url)，预览链接![](url)
+<br>其他语法：[[url]]、[][url]
+<br>无区别，obsidian还进行加强了
+
+<br>唯一title可以不需要路径，只要title即可
+<br>图片外的也可以进行预览
+
+
+<br>建议无论使用哪个都用相对链接
+<br>链接类型：
+
+<br>链接
+<br>图片
+<br>内部md（无需要扩展名）
+<br>白板（canvas）
+
+
+
+
+<br>基本可以都是内部链接，即相对于Vault，如果拖进来一个文件，会自动复制文件到本Vault
+<br>复制为obsidian链接：obsidian://open?vault=obsidian-lean&amp;file=%E6%8F%92%E4%BB%B6%E7%AC%94%E8%AE%B0%2FGithub%20Link%2F%E4%BD%BF%E7%94%A8，点击链接会打开obsidian到指定文件
+<br><br>
+<br>YAML Front Matter
+]]></description><link>语法.html</link><guid isPermaLink="false">语法.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Wed, 01 May 2024 08:14:09 GMT</pubDate></item><item><title><![CDATA[Digital Garden]]></title><description><![CDATA[ 
+ <br>
+<br>使用Github存储代码，Vercel部署网站
+
+<br><a data-tooltip-position="top" aria-label="https://github.com/oleeskild/obsidian-digital-garden?tab=readme-ov-file" rel="noopener" class="external-link" href="https://github.com/oleeskild/obsidian-digital-garden?tab=readme-ov-file" target="_blank">奥利斯基尔/黑曜石数字花园 --- oleeskild/obsidian-digital-garden (github.com)</a>
+
+
+<br>选择性上传
+
+<br>dg-home: true主页
+
+<br>尽管是主页，但却可以不在根目录下
+
+
+<br>dg-publish: true上传该note
+
+
+<br>只处理链接语法[[]] ![[]]
+
+<br>[]()、![]()不行，这个只能是相对路径
+<br>![[]]不要在代码块写，仍然会被替换
+
+
+<br>增强语法：<a data-tooltip-position="top" aria-label="https://dg-docs.ole.dev/features/" rel="noopener" class="external-link" href="https://dg-docs.ole.dev/features/" target="_blank">Features (ole.dev)</a>
+]]></description><link>插件笔记\digital-garden.html</link><guid isPermaLink="false">插件笔记/Digital Garden.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Wed, 01 May 2024 07:59:59 GMT</pubDate></item><item><title><![CDATA[配置]]></title><description><![CDATA[ 
+ <br><br><br>
+<br>Default result size：github-query的result size
+<br>Status tooltips：悬停提示词，开启了好像也没用
+<br>Pull request mergeability：给PR加is mergaeable icon，开启了好像也没用
+<br><br><br>
+<br>Github Repository Page
+
+<br><a rel="noopener" class="external-link" href="https://github.com/nathonius/obsidian-github-link" target="_blank">https://github.com/nathonius/obsidian-github-link</a>
+
+
+<br>Issues，title="Run prettier during lint"
+
+<br><a rel="noopener" class="external-link" href="https://github.com/nathonius/obsidian-github-link/issues/110" target="_blank">https://github.com/nathonius/obsidian-github-link/issues/110</a>
+
+<br>Open
+
+
+<br><a rel="noopener" class="external-link" href="https://github.com/nathonius/obsidian-github-link/issues/109" target="_blank">https://github.com/nathonius/obsidian-github-link/issues/109</a>
+
+<br>Close
+
+
+
+
+<br>Pull Request，title="Update issue templates"
+
+<br><a rel="noopener" class="external-link" href="https://github.com/nathonius/obsidian-github-link/pull/98" target="_blank">https://github.com/nathonius/obsidian-github-link/pull/98</a>
+
+<br>Open
+
+
+<br><a rel="noopener" class="external-link" href="https://github.com/nathonius/obsidian-github-link/pull/112" target="_blank">https://github.com/nathonius/obsidian-github-link/pull/112</a>
+
+<br>&nbsp;Close、Merged
+
+
+
+
+<br><br>
+<br><a data-tooltip-position="top" aria-label="https://github.com/nathonius/obsidian-github-link/wiki/Codeblocks" rel="noopener" class="external-link" href="https://github.com/nathonius/obsidian-github-link/wiki/Codeblocks" target="_blank">Codeblocks · nathonius/obsidian-github-link Wiki</a>
+<br>outputType: table
+queryType: pull-request
+query: "is:pr repo:nathonius/obsidian-github-link"
+columns: [number, title, author, status]
+复制]]></description><link>插件笔记\github-link.html</link><guid isPermaLink="false">插件笔记/Github Link.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Wed, 01 May 2024 05:31:09 GMT</pubDate></item><item><title><![CDATA[Demo白板]]></title><description><![CDATA[ 
+ <img src="lib\media\神里绫华.jpg" draggable="false">神里绫华.jpg<br>
 <br>几乎全平台支持
 <br>本地编辑，但提供远程存储服务：<a data-tooltip-position="top" aria-label="https://obsidian.md/publish" rel="noopener" class="external-link" href="https://obsidian.md/publish" target="_blank">Obsidian Publish</a>
 
@@ -7,7 +314,13 @@
 
 
 <br>插件功能丰富
-index<br>白板测试]]></description><link>http://127.0.0.1/白板测试/demo白板.html</link><guid isPermaLink="false">白板测试/Demo白板.canvas</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 17:10:02 GMT</pubDate><enclosure url="http://127.0.0.1/lib/media/神里绫华.jpg" length="0" type="image/jpeg"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;http://127.0.0.1/lib/media/神里绫华.jpg&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[调用]]></title><description><![CDATA[ 
+<br>概念
+
+<br>Vault：笔记仓库
+
+
+<br>关于链接：基本可以都是内部链接，即相对于Vault，如果拖进来一个文件，会自动复制到本Vault
+index<br>白板测试]]></description><link>白板测试\demo白板.html</link><guid isPermaLink="false">白板测试/Demo白板.canvas</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 17:10:02 GMT</pubDate><enclosure url="lib\media\神里绫华.jpg" length="0" type="image/jpeg"/><content:encoded>&lt;figure&gt;&lt;img src="lib\media\神里绫华.jpg"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[调用]]></title><description><![CDATA[ 
  <br><br>
 val webView = createWebView()
 call(webView)
@@ -84,149 +397,10 @@ func call(webView: WebView){
 
 <br>shouldOverrideUrlLoading：撤销URL的加载，即取消请求
 <br>onLoadResource：将要加载的资源
-]]></description><link>http://127.0.0.1/笔记测试/android/webview.html</link><guid isPermaLink="false">笔记测试/android/WebView.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Wed, 13 Mar 2024 09:57:54 GMT</pubDate></item><item><title><![CDATA[Export]]></title><description><![CDATA[ 
+]]></description><link>笔记测试\android\webview.html</link><guid isPermaLink="false">笔记测试/android/WebView.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Wed, 13 Mar 2024 09:57:54 GMT</pubDate></item><item><title><![CDATA[一个白板]]></title><description><![CDATA[ 
  <br><br>
-<br>
-导出目录需要自己创建
-
-<br>
-目录结构：照搬目录
-
-<br>
-Online Web Server：图片资源是相对URL
-
-<br>
-Html Documents：图片资源是data编码（但是图片依然存在）
-
-<br>
-Raw Html Documents：
-
-<br>图片和Html Documents一样
-<br>无File nav tree，Search bar，Document outline/table of content
-
-
-<br>
-必须手动一个index文章
-
-<br>
-不能增量导出，每次都得导出所有需要的
-
-<br><br><br>
-<br>Theme Toogle：切换主题（Dart、Light）
-
-<br>默认当前主题，但可能不完全，但是基本都有
-
-
-<br>Document outline/table of contents（RightSideNav，Markdown标题目录）
-<br>File nav tree（LeftSideNav）
-<br>File &amp; Folder Icons
-<br>Search bar：可以用obsidian语法，但是有可能出现搜索不到的结果在搜索结果中
-<br>Graph view：关系图谱
-<br><br>
-<br>Only export modifies files：仅导出，从最新导出开始，被修改了的文件
-<br>Delete old files：删除，从最新导出开始，已导出但本次导出为选中的文件
-
-<br>增量导出？？，但是会导致File nav tree只有本次导出为选中的文件
-
-<br>因此推荐开启
-
-
-
-
-<br><br>
-<br>Public site URL
-
-<br>什么需要？RSS，head中一些SSO信息
-
-
-<br>Author Name：
-<br>Vault Title
-<br>Create RSS feed
-
-<br>或许是RSS订阅。。。
-
-
-<br><br>Log:
-[WARNING] 	Creating an RSS feed requires a site url to be set in the export settings.
-[INFO] 	Using "调用" header as title because it was H1 at the top of the page
-[INFO] 	Using "export" header as title because it was H1 at the top of the page
-[INFO] 	Using "文章" header as title because it was H1 at the top of the page
-[INFO] 	Using "一个白板" header as title because it was H1 at the top of the page
-[INFO] 	Closing render window
-
-
-Settings:
-	settingsVersion --------- 1.8.01
-	makeOfflineCompatible     false
-	inlineAssets ------------ false
-	includePluginCSS          1 plugins included
-	includeSvelteCSS -------- true
-	titleProperty             title
-	customHeadContentPath ---
-	faviconPath              
-	documentWidth ----------- 40em
-	sidebarWidth              20em
-	minOutlineCollapse ------ 2
-	startOutlineCollapsed     false
-	allowFoldingHeadings ---- true
-	allowFoldingLists         true
-	allowResizingSidebars --- true
-	logLevel                  warning
-	minifyHTML -------------- true
-	makeNamesWebStyle         true
-	onlyExportModified ------ true
-	deleteOldFiles            true
-	addThemeToggle ---------- true
-	addOutline                true
-	addFileNav -------------- true
-	addSearchBar              true
-	addGraphView ------------ true
-	addTitle                  true
-	addRSSFeed -------------- true
-	siteURL                  
-	authorName -------------- liruohrh
-	vaultTitle                obsidian-lean
-	exportPreset ------------ website
-	openAfterExport           false
-	graphAttractionForce ---- 1
-	graphLinkLength           10
-	graphRepulsionForce ----- 150
-	graphCentralForce         3
-	graphEdgePruning -------- 100
-	graphMinNodeSize          3
-	graphMaxNodeSize -------- 7
-	showDefaultTreeIcons      true
-	emojiStyle -------------- Native
-	defaultFileIcon           lucide//file
-	defaultFolderIcon ------- lucide//folder
-	defaultMediaIcon          lucide//file-image
-	exportPath -------------- C:\\\\Users\\LYM\\Documents\\obsidian\\note-dist
-	filesToExport             0
-
-
-Enabled Plugins:
-	Git File Explorer
-	Webpage HTML Export
-
-
-复制]]></description><link>http://127.0.0.1/插件笔记/webpage-html-export.html</link><guid isPermaLink="false">插件笔记/Webpage Html Export.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 17:21:30 GMT</pubDate></item><item><title><![CDATA[文章]]></title><description><![CDATA[ 
- <br><br>
-<br><a data-href="index" href="http://127.0.0.1/index.html" class="internal-link" target="_self" rel="noopener">index</a>
-<br><br>
-<br><a data-href="神里绫华.jpg" href="http://127.0.0.1/imgs/神里绫华.jpg" class="internal-link" target="_self" rel="noopener">神里绫华.jpg</a>
-<br><br><img alt="神里绫华.jpg" src="http://127.0.0.1/lib/media/神里绫华.jpg">]]></description><link>http://127.0.0.1/资源引测试/图片+文章.html</link><guid isPermaLink="false">资源引测试/图片+文章.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 16:45:36 GMT</pubDate><enclosure url="http://127.0.0.1/lib/media/神里绫华.jpg" length="0" type="image/jpeg"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;http://127.0.0.1/lib/media/神里绫华.jpg&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[一个白板]]></title><description><![CDATA[ 
- <br><br>
-<br><a data-tooltip-position="top" aria-label="Demo白板.canvas" data-href="Demo白板.canvas" href="http://127.0.0.1/白板测试/demo白板.html" class="internal-link" target="_self" rel="noopener">Demo白板</a>
-]]></description><link>http://127.0.0.1/资源引测试/引用白板的文章.html</link><guid isPermaLink="false">资源引测试/引用白板的文章.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 16:43:08 GMT</pubDate></item><item><title><![CDATA[index]]></title><description><![CDATA[ 
- <br>
-<br>几乎全平台支持
-<br>本地编辑，但提供远程存储服务：<a data-tooltip-position="top" aria-label="https://obsidian.md/publish" rel="noopener" class="external-link" href="https://obsidian.md/publish" target="_blank">Obsidian Publish</a>
-
-<br>但是可以用插件代替
-
-
-<br>插件功能丰富
-]]></description><link>http://127.0.0.1/index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 16:32:34 GMT</pubDate></item><item><title><![CDATA[obsidian配置]]></title><description><![CDATA[ 
+<br><a data-tooltip-position="top" aria-label="Demo白板.canvas" data-href="Demo白板.canvas" href="白板测试\demo白板.html" class="internal-link" target="_self" rel="noopener">Demo白板</a>
+]]></description><link>资源引测试\引用白板的文章.html</link><guid isPermaLink="false">资源引测试/引用白板的文章.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 16:43:08 GMT</pubDate></item><item><title><![CDATA[obsidian配置]]></title><description><![CDATA[ 
  <br>
 <br>每个obsidian仓库（Vault）都有自己的配置和插件.obsidian/，不会共享
-]]></description><link>http://127.0.0.1/obsidian配置.html</link><guid isPermaLink="false">obsidian配置.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 17:06:13 GMT</pubDate></item></channel></rss>
+]]></description><link>obsidian配置.html</link><guid isPermaLink="false">obsidian配置.md</guid><dc:creator><![CDATA[liruohrh]]></dc:creator><pubDate>Tue, 30 Apr 2024 17:06:13 GMT</pubDate></item></channel></rss>
